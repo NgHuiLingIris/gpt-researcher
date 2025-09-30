@@ -135,7 +135,7 @@ export default function ResearchPage({ params }: { params: { id: string } }) {
       let foundInBackend = false;
       try {
         console.log(`Checking backend for research ${id}...`);
-        const response = await fetch(`/api/reports/${id}`);
+        const response = await fetch(`http://localhost:8000/api/reports/${id}`);
         
         if (response.ok) {
           console.log(`Found research ${id} in backend!`);
@@ -356,7 +356,7 @@ export default function ResearchPage({ params }: { params: { id: string } }) {
         role: msg.role,
         content: msg.content
       }));
-      
+      console.log('Formatted messages for API:', formattedMessages);
       // Call the chat API
       const response = await fetch(`/api/chat`, {
         method: 'POST',

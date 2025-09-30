@@ -15,6 +15,7 @@ from pydantic import BaseModel
 # Add the parent directory to sys.path to make sure we can import from server
 sys.path.insert(0, os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
 
+from backend.utils import write_md_to_pdf, write_md_to_word
 from server.websocket_manager import WebSocketManager
 from server.server_utils import (
     get_config_dict, sanitize_filename,
@@ -23,7 +24,6 @@ from server.server_utils import (
 )
 
 from server.websocket_manager import run_agent
-from utils import write_md_to_word, write_md_to_pdf
 from gpt_researcher.utils.enum import Tone
 from chat.chat import ChatAgentWithMemory
 

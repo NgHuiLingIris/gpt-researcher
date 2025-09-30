@@ -207,7 +207,7 @@ async def test_store_in_vector_store_locals():
         report_type="research_report",
         vector_store=vector_store,
         report_source="local",
-        config_path= "test_local"
+        config_path= "../../../home/gpt-researcher/config/variables/test_local.json"
     )
 
     await researcher.conduct_research()
@@ -226,7 +226,7 @@ async def test_store_in_vector_store_hybrids():
         report_type="research_report",
         vector_store=vector_store,
         report_source="hybrid",
-        config_path= "test_local"
+        config_path= "../../../home/gpt-researcher/config/variables/test_local.json"
     )
     
     await researcher.conduct_research()

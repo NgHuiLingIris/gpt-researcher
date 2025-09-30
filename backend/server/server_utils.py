@@ -7,13 +7,16 @@ import shutil
 import traceback
 from typing import Awaitable, Dict, List, Any
 from fastapi.responses import JSONResponse, FileResponse
+from backend.utils import write_md_to_pdf, write_md_to_word, write_text_to_md
+from gpt_researcher.actions.utils import stream_output
 from gpt_researcher.document.document import DocumentLoader
 from gpt_researcher import GPTResearcher
-from utils import write_md_to_pdf, write_md_to_word, write_text_to_md
 from pathlib import Path
 from datetime import datetime
 from fastapi import HTTPException
 import logging
+
+from multi_agents.main import run_research_task
 
 logger = logging.getLogger(__name__)
 

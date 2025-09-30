@@ -131,6 +131,8 @@ class ChatAgentWithMemory:
             }
 
     def handle_tool_calls(self, messages, response_message):
+
+        cfg = Config()
         """Handle tool calls from OpenAI"""
         tool_calls_metadata = []
         
@@ -178,16 +180,18 @@ class ChatAgentWithMemory:
         
         # Get a new response from the model with the tool results
         second_response = client.chat.completions.create(
-            model="gpt-4o",
+            model=cfg.fast_llm_model,
             messages=messages,
         )
         
         return second_response.choices[0].message.content, tool_calls_metadata
 
     def process_chat_completion(self, messages: List[Dict[str, str]]):
+
+        cfg = Config()
         """Process chat completion using OpenAI's API"""
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model=cfg.fast_llm_model,
             messages=messages,
             tools=get_tools(),
         )

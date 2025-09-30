@@ -41,7 +41,7 @@ class PyMuPDFScraper:
         """
         try:
             if self.is_url():
-                response = requests.get(self.link, timeout=5, stream=True)
+                response = requests.get(self.link, timeout=5)
                 response.raise_for_status()
 
                 with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:

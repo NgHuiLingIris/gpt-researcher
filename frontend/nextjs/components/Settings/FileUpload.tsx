@@ -9,7 +9,7 @@ const FileUpload = () => {
 
   const fetchFiles = useCallback(async () => {
     try {
-      const response = await axios.get(`${host}/files/`);
+      const response = await axios.get(`http://localhost:8000/files/`);
       setFiles(response.data.files);
     } catch (error) {
       console.error('Error fetching files:', error);
@@ -27,7 +27,7 @@ const FileUpload = () => {
     });
     
     try {
-      await axios.post(`${host}/upload/`, formData, {
+      await axios.post(`http://localhost:8000/upload/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -40,7 +40,7 @@ const FileUpload = () => {
 
   const deleteFile = async (filename: never) => {
     try {
-      await axios.delete(`${host}/files/${filename}`);
+      await axios.delete(`http://localhost:8000/files/${filename}`);
       fetchFiles();
     } catch (error) {
       console.error('Error deleting file:', error);

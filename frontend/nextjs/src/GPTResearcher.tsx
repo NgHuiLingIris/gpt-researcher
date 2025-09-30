@@ -30,6 +30,7 @@ export const GPTResearcher = ({
   onResultsChange,
   theme = {}
 }: GPTResearcherProps) => {
+  console.log("GPTResearcher component mounted");
 
   localStorage.setItem('apiURL', apiUrl);
 
@@ -72,7 +73,7 @@ export const GPTResearcher = ({
       onResultsChange(orderedData);
     }
   }, [orderedData, onResultsChange]);
-
+  console.log("API URL:", currentApiUrl);
   const { socket, initializeWebSocket } = useWebSocket(
     setOrderedData,
     setAnswer,

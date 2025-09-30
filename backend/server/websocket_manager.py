@@ -7,6 +7,7 @@ from typing import Dict, List
 
 from fastapi import WebSocket
 
+from multi_agents.main import run_research_task
 from report_type import BasicReport, DetailedReport
 
 from gpt_researcher.utils.enum import ReportType, Tone
