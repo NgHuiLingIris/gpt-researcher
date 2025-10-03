@@ -319,6 +319,7 @@ async def research_report_chat(research_id: str, request: Request):
     Directly processes the raw request data to avoid validation errors.
     """
     try:
+        logger.info(f"Chat request for report ID: {research_id}")
         # Get raw JSON data from request
         data = await request.json()
         
@@ -330,7 +331,7 @@ async def research_report_chat(research_id: str, request: Request):
         )
 
         # Process the chat and get response with metadata
-        response_content, tool_calls_metadata = await chat_agent.chat(data.get("messages", []), None)
+        response_content, tool_calls_metadata = await chat_agent.chat(data.get("messages", []), None, stream=True)
         
         if tool_calls_metadata:
             logger.info(f"Tool calls used: {json.dumps(tool_calls_metadata)}")

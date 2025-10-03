@@ -368,59 +368,46 @@ export const useResearchHistory = () => {
 
   // Add chat message
   const addChatMessage = async (id: string, message: ChatMessage) => {
-    try {
-      const response = await fetch(`http://localhost:8000/api/reports/${id}/chat`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(message),
-      });
-      
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-      
-      // Update local state
-      setHistory(prev => 
+      // Just update local state and localStorage
+      try {
+      setHistory(prev =>
         prev.map(item => {
           if (item.id === id) {
             const chatMessages = item.chatMessages || [];
-            return { ...item, chatMessages: [...chatMessages, message] };
-          }
-          return item;
-        })
-      );
-      
-      // Also update localStorage
-      const localHistory = localStorage.getItem('researchHistory');
-      if (localHistory) {
-        const parsedHistory = JSON.parse(localHistory);
-        const updatedHistory = parsedHistory.map((item: any) => {
-          if (item.id === id) {
-            const chatMessages = item.chatMessages || [];
-            return { ...item, chatMessages: [...chatMessages, message] };
-          }
-          return item;
-        });
-        localStorage.setItem('researchHistory', JSON.stringify(updatedHistory));
-      }
-      
-      return true;
+              return { ...item, chatMessages: [...chatMessages, message] };
+            }
+            return item;
+          })
+        );
+        
+        // Also update localStorage
+        const localHistory = localStorage.getItem('researchHistory');
+        if (localHistory) {
+          const parsedHistory = JSON.parse(localHistory);
+          const updatedHistory = parsedHistory.map((item: any) => {
+            if (item.id === id) {
+              const chatMessages = item.chatMessages || [];
+              return { ...item, chatMessages: [...chatMessages, message] };
+            }
+            return item;
+          });
+          localStorage.setItem('researchHistory', JSON.stringify(updatedHistory));
+        }
+        
+        return true;
     } catch (error) {
       console.error('Error adding chat message:', error);
       
-      // Update local state anyway
-      setHistory(prev => 
-        prev.map(item => {
-          if (item.id === id) {
-            const chatMessages = item.chatMessages || [];
-            return { ...item, chatMessages: [...chatMessages, message] };
+        // Update local state anyway
+        setHistory(prev => 
+          prev.map(item => {
+            if (item.id === id) {
+              const chatMessages = item.chatMessages || [];
+              return { ...item, chatMessages: [...chatMessages, message] };
           }
           return item;
         })
       );
-      
       // Update localStorage
       const localHistory = localStorage.getItem('researchHistory');
       if (localHistory) {
@@ -428,14 +415,13 @@ export const useResearchHistory = () => {
         const updatedHistory = parsedHistory.map((item: any) => {
           if (item.id === id) {
             const chatMessages = item.chatMessages || [];
-            return { ...item, chatMessages: [...chatMessages, message] };
+            return { ...item, chatMessages: [...chatMessages, message], timestamp: Date.now() };
           }
           return item;
         });
         localStorage.setItem('researchHistory', JSON.stringify(updatedHistory));
       }
-      
-      return false;
+      return true; // always succeed (since only local)
     }
   };
 
