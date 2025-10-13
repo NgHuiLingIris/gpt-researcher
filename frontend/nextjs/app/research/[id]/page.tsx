@@ -358,7 +358,7 @@ export default function ResearchPage({ params }: { params: { id: string } }) {
       }));
       console.log('Formatted messages for API:', formattedMessages);
       // Call the chat API
-      const response = await fetch(`/api/chat`, {
+      const response = await fetch(`http://localhost:8000/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
