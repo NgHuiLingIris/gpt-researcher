@@ -4,9 +4,9 @@ DEFAULT_CONFIG: BaseConfig = {
     "RETRIEVER": "tavily",
     "EMBEDDING": "openai:text-embedding-3-small",
     "SIMILARITY_THRESHOLD": 0.42,
-    "FAST_LLM": "openai:gpt-4.1", # used for chats, including tool calls
-    "SMART_LLM": "openai:gpt-4.1",  # used for agent creator, report processing and query processing
-    "STRATEGIC_LLM": "openai:gpt-4.1",  # used for tool calls, generating sub queries, MCP tool selector, deep research, multi agents
+    "FAST_LLM": "openai:gpt-5.1", # used for chats, including tool calls
+    "SMART_LLM": "openai:gpt-5.1",  # used for agent creator, report processing and query processing
+    "STRATEGIC_LLM": "openai:gpt-5.1",  # used for tool calls, generating sub queries, MCP tool selector, deep research, multi agents
     "FAST_TOKEN_LIMIT": 3000,
     "SMART_TOKEN_LIMIT": 6000,
     "STRATEGIC_TOKEN_LIMIT": 4000,
